@@ -11,4 +11,7 @@ class Combat:
 
     def attack(self):
         roll = random.randint(1, self.dodge_limit)
-        return roll > 4
+        if roll > 4:
+            return random.randint(1, 3)
+        else:
+            return roll

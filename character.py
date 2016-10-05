@@ -10,9 +10,9 @@ class Character(Combat):
     def attack(self):
         roll = random.randint(1, self.attack_limit)
         if self.weapon == 'sword':
-            roll = + 1
+            roll += 1
         elif self.weapon == 'axe':
-            roll = + 2
+            roll += 2
         return roll > 4
 
     def weapon_choice(self):
@@ -37,8 +37,8 @@ class Character(Combat):
 
     def rest(self):
         if self.hit_points < self.base_hit_points:
-            self.hit_points = + 1
+            self.hit_points += 1
 
     def hit(self):
-        self.hit_points =- 1
+        self.hit_points -= 1
         return self.hit_points
