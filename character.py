@@ -12,8 +12,12 @@ class Character(Combat):
         if self.weapon == 'sword':
             roll += 1
         elif self.weapon == 'axe':
-            roll += 2
-        return roll > 4
+            roll += 4
+        if roll > 4:
+            roll = random.randint(1, 3)
+        else:
+            roll = False
+        return roll
 
     def weapon_choice(self):
         weapon = raw_input('Weapon ([S]word, [A]xe, [B]ow, [St]taff): ').lower()
