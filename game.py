@@ -2,7 +2,7 @@ from monster import Goblin, Dragon, Troll
 from character import Character
 import random
 from combat import *
-import sys
+import sys,os
 
 
 class Game:
@@ -17,7 +17,7 @@ class Game:
 
     def get_monster(self):
         try:
-            return random.choice(self.monsters)
+            return self.monsters.pop()
         except IndexError:
             return None
 
@@ -49,23 +49,34 @@ class Game:
             self.player.rest()
             print self.player.hit_points
 
-    def __init__(self):
-        self.setup()
 
-        while self.player.hit_points > 0 and self.monster.hit_points > 0:
-            self.monster_turn()
-            self.player_turn()
-        if self.player.hit_points > 0:
+    def clean_up(self):
+        if self.monster.hit_points <= 0:
             print "You killed that monster"
+            self.player.experience += self.monster.experience
+            print self.player.experience
             choice = raw_input("Choose a new Monster?: ")
             if choice == 'yes':
-                self.setup()
+                self.get_monster()
             else:
                 print "Thanks for playing"
                 sys.exit()
+
+    def __init__(self):
+        self.setup()
+
+        while self.player.hit_points > 0 or (self.monster.hit_points > 0 and self.monster):
+            self.monster_turn()
+            self.player_turn()
+            self.clean_up()
+
+
         else:
             print "You loose"
             choice = raw_input("Play again?: ")
             if choice == 'no':
                 print "Loser"
                 sys.exit()
+
+
+Game()

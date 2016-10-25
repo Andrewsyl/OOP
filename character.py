@@ -14,7 +14,7 @@ class Character(Combat):
         elif self.weapon == 'axe':
             roll += 4
         if roll > 4:
-            roll = random.randint(1, 3)
+            roll = random.randint(1, 9)
         else:
             roll = False
         return roll

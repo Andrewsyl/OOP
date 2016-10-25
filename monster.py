@@ -39,13 +39,13 @@ class Monster(Combat):
 
 class Goblin(Monster):
     hit_points = 5
-    exp = 10
+    experience = 10
 
 
 class Dragon(Monster):
     hit_points = 10
-    exp = 15
+    experience = 15
 
 class Troll(Monster):
     hit_points = 8
-    exp = 11
+    experience = 11
