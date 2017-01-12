@@ -13,18 +13,21 @@ class Game:
             Dragon(),
             Troll()
         ]
-        self.monster = self.get_monster()
+        self.monster = self.monsters.pop()
 
     def get_monster(self):
         try:
-            return self.monsters.pop()
+            self.monster = self.monsters.pop()
+            print "A " + str(self.monster.__class__.__name__) + " appears"
+            return self.monster
         except IndexError:
-            return None
+            print "There are no more monsters.\n You saved the village!"
+            sys.exit()
 
     def monster_turn(self):
         self.monster_attack = random.randint(0, 1)
         if self.monster_attack == 1:
-            print 'Monster Attacks'
+            print str(self.monster.__class__.__name__) + ' Attacks'
             self.player.dodge()
             if self.player.dodge() == True:
                 print "You dodged the attack!"
@@ -40,10 +43,14 @@ class Game:
         if choice == 'attack':
             player_attack = self.player.attack()
             if player_attack != False:
+                if self.player.level == 2:
+                    player_attack += 50
                 print "You hit the monster and did " + str(player_attack) + " damage"
                 self.monster.hit_points -= player_attack
             else:
                 print "Your attack missed"
+            if self.monster.hit_points < 0:
+                self.monster.hit_points = 0
             print "The {} has {} hit points".format(self.monster.__class__.__name__, self.monster.hit_points)
         elif choice == 'rest':
             self.player.rest()
@@ -54,7 +61,11 @@ class Game:
         if self.monster.hit_points <= 0:
             print "You killed that monster"
             self.player.experience += self.monster.experience
-            print self.player.experience
+            print "You gained " + str(self.monster.experience) + " experience points"
+            print "Your experience is " + str(self.player.experience)
+            if self.player.experience > 20 and self.player.experience < 50:
+                self.player.level = 2
+                print "You have reached level " + str(self.player.level)
             choice = raw_input("Choose a new Monster?: ")
             if choice == 'yes':
                 self.get_monster()

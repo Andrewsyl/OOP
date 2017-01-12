@@ -6,6 +6,7 @@ class Character(Combat):
     attack_limit = 10
     experience = 0
     base_hit_points = 10
+    level = 1
 
     def attack(self):
         roll = random.randint(1, self.attack_limit)
@@ -22,13 +23,17 @@ class Character(Combat):
     def weapon_choice(self):
         weapon = raw_input('Weapon ([S]word, [A]xe, [B]ow, [St]taff): ').lower()
         if weapon == 's':
-            return 'Sword'
+            print "You chose the Sword!"
+            return 'sword'
         elif weapon == 'a':
-            return 'Axe'
+            print "You chose the Axe!"
+            return 'axe'
         elif weapon == 'b':
-            return 'Bow'
+            print "You chose the Bow!"
+            return 'bow'
         elif weapon == 'St':
-            return 'Staff'
+            print "You chose the Staff!"
+            return 'staff'
         else:
             self.weapon_choice()
 

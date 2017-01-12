@@ -46,6 +46,7 @@ class Dragon(Monster):
     hit_points = 10
     experience = 15
 
+
 class Troll(Monster):
     hit_points = 8
     experience = 11
