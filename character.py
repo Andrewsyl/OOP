@@ -37,6 +37,11 @@ class Character(Combat):
         else:
             self.weapon_choice()
 
+    def level_up(self):
+        if self.experience > 20 and self.experience < 50:
+            self.level = 2
+            print "You have reached level " + str(self.level)
+
     def __init__(self, **kwargs):
         self.name = raw_input('Name: ')
         self.weapon = self.weapon_choice()

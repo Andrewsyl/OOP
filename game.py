@@ -2,7 +2,7 @@ from monster import Goblin, Dragon, Troll
 from character import Character
 import random
 from combat import *
-import sys,os
+import sys, os
 
 
 class Game:
@@ -34,7 +34,7 @@ class Game:
             else:
                 print "Monster hit you!"
                 self.player.hit()
-            print self.player.hit_points
+            print "You have " + str(self.player.hit_points) + " HP"
         else:
             print "Monster didn't attack"
 
@@ -56,16 +56,13 @@ class Game:
             self.player.rest()
             print self.player.hit_points
 
-
     def clean_up(self):
         if self.monster.hit_points <= 0:
             print "You killed that monster"
             self.player.experience += self.monster.experience
             print "You gained " + str(self.monster.experience) + " experience points"
             print "Your experience is " + str(self.player.experience)
-            if self.player.experience > 20 and self.player.experience < 50:
-                self.player.level = 2
-                print "You have reached level " + str(self.player.level)
+            self.player.level_up()
             choice = raw_input("Choose a new Monster?: ")
             if choice == 'yes':
                 self.get_monster()
