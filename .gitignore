@@ -1,4 +1,5 @@
 *.pyc
 *.wp*
 *.sqlite3
+sdfdsf.py
 local_settings.py
