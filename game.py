@@ -2,7 +2,7 @@ from monster import Goblin, Dragon, Troll
 from character import Character
 import random
 from combat import *
-import sys, os
+import sys,os
 
 
 class Game:
@@ -55,6 +55,7 @@ class Game:
         elif choice == 'rest':
             self.player.rest()
             print self.player.hit_points
+
 
     def clean_up(self):
         if self.monster.hit_points <= 0:

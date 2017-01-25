@@ -38,7 +38,9 @@ class Character(Combat):
             self.weapon_choice()
 
     def level_up(self):
-        if self.experience > 20 and self.experience < 50:
+        if self.level == 2:
+            pass
+        elif self.experience > 20 and self.experience < 50:
             self.level = 2
             print "You have reached level " + str(self.level)
 
@@ -54,5 +56,5 @@ class Character(Combat):
             self.hit_points += 1
 
     def hit(self):
-        self.hit_points -= 1
+        self.hit_points -= random.choice(range(5))
         return self.hit_points
