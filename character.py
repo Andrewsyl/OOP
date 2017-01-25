@@ -21,19 +21,19 @@ class Character(Combat):
         return roll
 
     def weapon_choice(self):
-        weapon = raw_input('Weapon ([S]word, [A]xe, [B]ow, [St]taff): ').lower()
-        if weapon == 's':
+        weapon = raw_input('Weapon (Sword, Axe, Bow, Staff): ').lower()
+        if weapon == 'sword':
             print "You chose the Sword!"
-            return 'sword'
-        elif weapon == 'a':
+            return weapon
+        elif weapon == 'axe':
             print "You chose the Axe!"
-            return 'axe'
-        elif weapon == 'b':
+            return weapon
+        elif weapon == 'bow':
             print "You chose the Bow!"
-            return 'bow'
-        elif weapon == 'St':
+            return weapon
+        elif weapon == 'staff':
             print "You chose the Staff!"
-            return 'staff'
+            return weapon
         else:
             self.weapon_choice()
 
@@ -57,4 +57,6 @@ class Character(Combat):
 
     def hit(self):
         self.hit_points -= random.choice(range(5))
+        if self.hit_points < 0:
+            self.hit_points = 0
         return self.hit_points
