@@ -2,6 +2,7 @@ import random
 from combat import Combat
 
 COLOR = ('blue', 'green', 'black', 'orange')
+NOISES = ('boo', 'tweet', 'oink', 'moo', 'help', 'don\'\t hurt me')
 
 
 class Slime:
@@ -18,7 +19,7 @@ class Booger:
 class Monster(Combat):
     def __init__(self, **kwargs):
         self.name = kwargs.get('name', 'Rambo')
-        self.sound = kwargs.get('sound', 'Boo')
+        self.sound = kwargs.get('sound', random.choice(NOISES))
         self.color = random.choice(COLOR)
         self.hit_points = random.randint(1, 20)
 

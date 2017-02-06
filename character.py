@@ -38,11 +38,27 @@ class Character(Combat):
             self.weapon_choice()
 
     def level_up(self):
-        if self.level == 2:
-            pass
-        elif self.experience > 20 and self.experience < 50:
+        if (20 > self.experience < 50) and self.level != 2:
             self.level = 2
             print "You have reached level " + str(self.level)
+
+    def player_go(self, player, monster):
+        choice = raw_input('Attack or rest: ').lower()
+        if choice == 'attack':
+            player_attack = player.attack()
+            if player_attack:
+                if player.level == 2:
+                    player_attack += 50
+                print "You hit the monster and did " + str(player_attack) + " damage"
+                monster.hit_points -= player_attack
+            else:
+                print "Your attack missed"
+            if monster.hit_points < 0:
+                monster.hit_points = 0
+            print "The {} has {} hit points".format(monster.__class__.__name__, monster.hit_points)
+        elif choice == 'rest':
+            player.rest()
+            print player.hit_points
 
     def __init__(self, **kwargs):
         self.name = raw_input('Name: ')

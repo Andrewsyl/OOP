@@ -18,14 +18,15 @@ class Game:
         try:
             self.monster = self.monsters.pop()
             print "A " + str(self.monster.__class__.__name__) + " appears"
+            print self.monster.battlecry()
             return self.monster
         except IndexError:
             print "There are no more monsters.\n You saved the village!"
             sys.exit()
 
     def monster_turn(self):
-        self.monster_attack = random.randint(0, 1)
-        if self.monster_attack == 1:
+        self.monster_attack = random.randint(0, 5)
+        if self.monster_attack > 2:
             print str(self.monster.__class__.__name__) + ' Attacks'
             self.player.dodge()
             if self.player.dodge() == True:
@@ -38,22 +39,7 @@ class Game:
             print "Monster didn't attack"
 
     def player_turn(self):
-        choice = raw_input('Attack or rest: ').lower()
-        if choice == 'attack':
-            player_attack = self.player.attack()
-            if player_attack != False:
-                if self.player.level == 2:
-                    player_attack += 50
-                print "You hit the monster and did " + str(player_attack) + " damage"
-                self.monster.hit_points -= player_attack
-            else:
-                print "Your attack missed"
-            if self.monster.hit_points < 0:
-                self.monster.hit_points = 0
-            print "The {} has {} hit points".format(self.monster.__class__.__name__, self.monster.hit_points)
-        elif choice == 'rest':
-            self.player.rest()
-            print self.player.hit_points
+        self.player.player_go(player=self.player, monster=self.monster)
 
     def clean_up(self):
         if self.monster.hit_points <= 0:
