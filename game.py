@@ -17,36 +17,25 @@ class Game:
     def get_monster(self):
         try:
             self.monster = self.monsters.pop()
-            print "A " + str(self.monster.__class__.__name__) + " appears"
+            print "A %s appears" % str(self.monster.__class__.__name__)
             print self.monster.battlecry()
             return self.monster
         except IndexError:
-            print "There are no more monsters.\n You saved the village!"
+            print "\n****************\nThere are no more monsters.\n You saved the village!"
             sys.exit()
 
     def monster_turn(self):
-        self.monster_attack = random.randint(0, 5)
-        if self.monster_attack > 2:
-            print str(self.monster.__class__.__name__) + ' Attacks'
-            self.player.dodge()
-            if self.player.dodge() == True:
-                print "You dodged the attack!"
-            else:
-                print "Monster hit you!"
-                self.player.hit()
-            print "You have " + str(self.player.hit_points) + " HP"
-        else:
-            print "Monster didn't attack"
+        self.monster.monster_go(player=self.player, monster=self.monster)
 
     def player_turn(self):
         self.player.player_go(player=self.player, monster=self.monster)
 
     def clean_up(self):
         if self.monster.hit_points <= 0:
-            print "You killed that monster"
+            print "You killed the %s" % str(self.monster.__class__.__name__)
             self.player.experience += self.monster.experience
-            print "You gained " + str(self.monster.experience) + " experience points"
-            print "Your experience is " + str(self.player.experience)
+            print "You gained %s experience points" % str(self.monster.experience)
+            print "Your experience is %s" % str(self.player.experience)
             self.player.level_up()
             choice = raw_input("Choose a new Monster?: ")
             if choice == 'yes':

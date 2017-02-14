@@ -37,6 +37,20 @@ class Monster(Combat):
                                              self.hit_points
                                              )
 
+    def monster_go(self, player, monster):
+        monster_attack = random.randint(0, 5)
+        if monster_attack > 2:
+            print str(monster.__class__.__name__) + ' Attacks'
+            player.dodge()
+            if player.dodge() == True:
+                print "You dodged the attack!"
+            else:
+                print "Monster hit you!"
+                player.hit()
+            print "You have " + str(player.hit_points) + " HP"
+        else:
+            print "Monster didn't attack"
+
 
 class Goblin(Monster):
     hit_points = 5
